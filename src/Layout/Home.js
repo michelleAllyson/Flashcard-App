@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Study from "./Study";
 import Deck from "./Deck";
+import { listDecks } from "../utils/api";
 
 //path: "/"
 
@@ -23,18 +24,37 @@ import Deck from "./Deck";
             // If the user clicks "OK", the deck is deleted and is no longer visible on the home screen.
 
 
-export const Home = ({ decks }) => (
-    <article>
-        <div>
-            <Link to="/decks/new" className="btn btn-secondary">Create Deck</Link>
-        </div>
-        <div className="border p-4 h-100 d-flex flex-column"> 
-            <h3 className="text-secondary flex-fill">Rendering in React</h3>
+export const Home = () => {
 
-        </div>
+    const [decks, setDecks] = useState([]); 
 
-    </article>
-);
+    useEffect(() => {
+        async function loadDecks() {
+            try {
+                const response = await listDecks();
+                setDecks(response);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        loadDecks();
+        console.log("decks", decks);
+    }, []);
+
+    return (
+        decks.length === 0 ? <p>Loading...</p> :
+        <article>
+            <div>
+                {console.log("decks", decks)}
+                <Link to="/decks/new" className="btn btn-secondary">Create Deck</Link>
+            </div>
+            <div className="border p-4 h-100 d-flex flex-column"> 
+                <h3 className="text-secondary flex-fill">{decks[0].name}</h3>
+            </div>
+        </article>
+    );
+};
+
 
 
 
