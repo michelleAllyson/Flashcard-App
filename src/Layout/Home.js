@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import Study from "./Study";
 import Deck from "./Deck";
-import { listDecks } from "../utils/api";
+import { listDecks , deleteDeck } from "../utils/api";
 
 //path: "/"
 
@@ -27,6 +27,15 @@ import { listDecks } from "../utils/api";
 export const Home = () => {
 
     const [decks, setDecks] = useState([]); 
+    const history = useHistory();
+    
+    const handleDelete = async (deckId) => {
+        const result = window.confirm("Delete this deck? You will not be able to recover it.");
+        if (result) {
+            await deleteDeck(deckId);
+            history.go(0);
+        }
+    }
 
     useEffect(() => {
         async function loadDecks() {
@@ -45,18 +54,21 @@ export const Home = () => {
         decks.length === 0 ? <p>Loading...</p> :
         <article>
             <div>
-                {console.log("decks", decks)}
                 <Link to="/decks/new" className="btn btn-secondary">Create Deck</Link>
             </div>
-            <div className="border p-4 h-100 d-flex flex-column"> 
-                <div className="d-flex justify-content-between">
-                    <h3 className="text-secondary flex-fill">{decks[0].name}</h3>
-                    <p className="flex-fill">{decks[0].description}</p>
+            {decks.map((deck) => ( 
+                <div className="border p-4 h-100 d-flex flex-column" key={deck.id}> 
+                    <div className="d-flex justify-content-between">
+                        <h3 className="text-secondary flex-fill">{deck.name}</h3>
+                        <div className="text-secondary flex-fill">{deck.cards.length} cards</div>
+                        <p className="flex-fill">{deck.description}</p>
+                        <Link to= {`/decks/${deck.id}/study`} className="btn btn-secondary">Study</Link>
+                        <Link to= {`/decks/${deck.id}`} className="btn btn-secondary">View</Link>
+                        <button className="btn btn-danger" onClick={() => handleDelete(deck.id)}>Delete</button>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <button className="btn btn-secondary">Study</button>
-            </div>
+            )
+            )}
         </article>
     );
 };
