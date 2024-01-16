@@ -49,7 +49,13 @@ export const Home = () => {
                 <Link to="/decks/new" className="btn btn-secondary">Create Deck</Link>
             </div>
             <div className="border p-4 h-100 d-flex flex-column"> 
-                <h3 className="text-secondary flex-fill">{decks[0].name}</h3>
+                <div className="d-flex justify-content-between">
+                    <h3 className="text-secondary flex-fill">{decks[0].name}</h3>
+                    <p className="flex-fill">{decks[0].description}</p>
+                </div>
+            </div>
+            <div>
+                <button className="btn btn-secondary">Study</button>
             </div>
         </article>
     );
