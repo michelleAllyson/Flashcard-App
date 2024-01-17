@@ -34,6 +34,18 @@ export const Study = () => {
         }
     }
 
+    useEffect(() => {
+        async function loadStudyDeck() {
+            try {
+                const response = await readDeck(deckId);
+                setDeck(response);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        loadStudyDeck();
+    }, []);
+
     const handleFlip = () => {
         //flip the card
     }
@@ -49,23 +61,32 @@ export const Study = () => {
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                        <Link to="/">Home / </Link>
-                        <Link to={`/decks/${deck.id}`}>{deck.name} / </Link>
+                        <Link to="/"> Home /  </Link>
+                        <Link to={`/decks/${deck.id}`}> {deck.name} /  </Link>
                         <Link to={`/decks/${deck.id}/study`}>Study</Link>
                     </li> 
                 </ol>
             </nav>
             <div> 
                 {/* //title of deck */}
+                <h1>Study: {deck.name}</h1>
             </div>
-            <div>
-                {/* //card # of #.length */}
-                {/* card contents */}
+            <div className="card" key={deck.id}> 
+                <div className="card-body border">
+                    <div>
+                        <p className="card-subtitle text-secondary">Card (#cards.id) of (cards.length)</p>
+                        {/* //card # of #.length */}
+                        <p className="card-text flex-fill">(card.front)</p>
+                        {/* card contents */}
+                    </div>
+                    <div>
+                        <button>Flip</button>
+                        {/* //flip button */}
+                        <button>Next</button>
+                        {/* //next button */}
+                    </div>       
+                </div>
             </div>
-            <div>
-                {/* //flip button */}
-                {/* //next button */}
-            </div>       
        </div>
        
         )
