@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import Study from "./Study";
 import Deck from "./Deck";
 import { listDecks , deleteDeck } from "../utils/api";
+import { TrashIcon } from '@heroicons/react/24/solid';
+import { EyeIcon } from '@heroicons/react/24/solid';
+import { BookmarkIcon } from '@heroicons/react/24/solid';
 
 //path: "/"
 
@@ -47,24 +50,29 @@ export const Home = () => {
             }
         }
         loadDecks();
-        console.log("decks", decks);
     }, []);
 
     return (
-        decks.length === 0 ? <p>Loading...</p> :
+        // decks.length === 0 ? <p>Loading...</p> :
         <article>
             <div>
                 <Link to="/decks/new" className="btn btn-secondary">Create Deck</Link>
             </div>
             {decks.map((deck) => ( 
-                <div className="border p-4 h-100 d-flex flex-column" key={deck.id}> 
-                    <div className="d-flex justify-content-between">
-                        <h3 className="text-secondary flex-fill">{deck.name}</h3>
-                        <div className="text-secondary flex-fill">{deck.cards.length} cards</div>
-                        <p className="flex-fill">{deck.description}</p>
-                        <Link to= {`/decks/${deck.id}/study`} className="btn btn-secondary">Study</Link>
-                        <Link to= {`/decks/${deck.id}`} className="btn btn-secondary">View</Link>
-                        <button className="btn btn-danger" onClick={() => handleDelete(deck.id)}>Delete</button>
+                <div className="card" key={deck.id}> 
+                    <div className="card-body border">
+                        <h3 className="card-title text-secondary flex-fill">{deck.name}</h3>
+                        <h6 className="card-subtitle text-secondary">{deck.cards.length} cards</h6>
+                        <p className="card-text flex-fill">{deck.description}</p>
+                        <Link to= {`/decks/${deck.id}/study`} className="btn btn-secondary">
+                            <BookmarkIcon /> Study
+                        </Link>
+                        <Link to= {`/decks/${deck.id}`} className="btn btn-secondary">
+                           <EyeIcon /> View                        
+                        </Link>
+                        <button className="btn btn-danger" onClick={() => handleDelete(deck.id)}>
+                            <TrashIcon /> 
+                        </button>
                     </div>
                 </div>
             )
