@@ -7,19 +7,20 @@ import { listDecks , deleteDeck } from "../utils/api";
 import { TrashIcon } from '@heroicons/react/24/solid';
 import { EyeIcon } from '@heroicons/react/24/solid';
 import { BookmarkIcon } from '@heroicons/react/24/solid';
+import { PlusIcon } from '@heroicons/react/16/solid';
 
 //path: "/"
 
 // "Create Deck" button should link to the Create Deck screen.
-    //add a "+" icon to the button
+    //add a "+" icon to the button------NEEDS STYLING
 
-// Existing decks are each shown with the deck name, the number of cards, and a "Study", "View", and "Delete" button.
+// Existing decks are each shown with the deck name, the number of cards, and a "Study", "View", and "Delete" button.----NEEDS STYLING
 
 // Clicking the "Study" button should link to the Study screen.--import Study from "./Study";
 
 // Clicking the "View" button should link to the Deck screen. --import Deck from "./Deck";
 
-// Clicking the "Delete" button shows a warning message before deleting the deck.
+// Clicking the "Delete" button shows a warning message before deleting the deck.----DONE 
     // You can use window.confirm() to create the modal dialog. 
        // Warning message: "Delete this deck? You will not be able to recover it."
        // Options: "Cancel" and "OK
@@ -53,10 +54,15 @@ export const Home = () => {
     }, []);
 
     return (
-        // decks.length === 0 ? <p>Loading...</p> :
+        decks.length === 0 ? <p>Loading...</p> :
         <article>
             <div>
-                <Link to="/decks/new" className="btn btn-secondary">Create Deck</Link>
+                <Link 
+                    to="/decks/new" 
+                    className="btn btn-secondary btn-sm"
+                >
+                    <PlusIcon /> Create Deck
+                </Link>
             </div>
             {decks.map((deck) => ( 
                 <div className="card" key={deck.id}> 
@@ -64,14 +70,24 @@ export const Home = () => {
                         <h3 className="card-title text-secondary flex-fill">{deck.name}</h3>
                         <h6 className="card-subtitle text-secondary">{deck.cards.length} cards</h6>
                         <p className="card-text flex-fill">{deck.description}</p>
-                        <Link to= {`/decks/${deck.id}/study`} className="btn btn-secondary">
+                        <Link 
+                            to= {`/decks/${deck.id}/study`} 
+                            className="btn btn-secondary btn-sm"
+                        >
                             <BookmarkIcon /> Study
                         </Link>
-                        <Link to= {`/decks/${deck.id}`} className="btn btn-secondary">
+                        <Link 
+                            to= {`/decks/${deck.id}`} 
+                            className="btn btn-primary btn-md"
+                        >
                            <EyeIcon /> View                        
                         </Link>
-                        <button className="btn btn-danger" onClick={() => handleDelete(deck.id)}>
-                            <TrashIcon /> 
+                        <button
+                            type="button"
+                            className="btn btn-danger btn-sm" 
+                            onClick={() => handleDelete(deck.id)}
+                        >
+                            <TrashIcon /> Delete
                         </button>
                     </div>
                 </div>
