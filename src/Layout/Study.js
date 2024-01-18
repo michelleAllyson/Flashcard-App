@@ -24,6 +24,7 @@ export const Study = () => {
 
     const { deckId } = useParams();
     const [deck, setDeck] = useState([]);
+    const [cards, setCards] = useState([]);
     const history = useHistory();
 
     const handleRestart = async(deckId) => {
@@ -54,6 +55,10 @@ export const Study = () => {
         //move to the next card
     }
 
+    const handleAddCard = () => {
+        //add a card to the deck if not enough cards
+    }
+
 
 
     return (
@@ -80,9 +85,21 @@ export const Study = () => {
                         {/* card contents */}
                     </div>
                     <div>
-                        <button>Flip</button>
+                        <button
+                            type="button"
+                            className="btn btn-secondary btn-sm"
+                            onClick={() => handleFlip()}
+                        >
+                        Flip
+                        </button>
                         {/* //flip button */}
-                        <button>Next</button>
+                        <button
+                            type="button"
+                            className="btn btn-primary btn-sm" 
+                            onClick={() => handleNext(deck.id)}
+                        >
+                        Next
+                        </button>
                         {/* //next button */}
                     </div>       
                 </div>
