@@ -47,6 +47,8 @@ export const Study = () => {
         loadStudyDeck();
     }, []);
 
+//May need more than what is listed below, but work in progress//
+
     const handleFlip = () => {
         //flip the card
     }
@@ -59,6 +61,9 @@ export const Study = () => {
         //add a card to the deck if not enough cards
     }
 
+    const handleNotEnoughCards = () => {}
+
+//May need more than what is listed above, but work in progress//
 
 
     return (

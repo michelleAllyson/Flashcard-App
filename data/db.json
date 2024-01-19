@@ -11,14 +11,14 @@
       "id": 2
     },
     {
-      "name": "Testing ",
-      "description": "Did it show up on the home screen?",
-      "id": 3
+      "name": "Test 11",
+      "description": "Will you take me to the deck screen? ",
+      "id": 6
     },
     {
-      "name": "Hello There",
-      "description": "Seeing what happens after I submit",
-      "id": 4
+      "name": "Multiplication Facts",
+      "description": "Practice your single digit multiplication facts.",
+      "id": 7
     }
   ],
   "cards": [
