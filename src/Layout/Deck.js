@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
+
+//utils
 import { readDeck, deleteDeck } from "../utils/api";
+
+//libraries for icons
 import { TrashIcon } from '@heroicons/react/24/solid';
 import { BookmarkIcon } from '@heroicons/react/24/solid';
 import { PlusIcon } from '@heroicons/react/16/solid';
