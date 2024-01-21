@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 
-import { readDeck } from "../utils/api";
+import { readDeck, updateDeck } from "../utils/api";
 
 //path: "/decks/:deckId/edit"
+
+
+//---------FUNCTIONALITY FINISHED (I THINK), STILL NEEDS STYLING 1/21/2024----------------
+
 //The Edit Deck screen has the following features:
 
 // The path to this screen should include the deckId (i.e., /decks/:deckId/edit). ---DONE---    
@@ -18,46 +22,62 @@ import { readDeck } from "../utils/api";
 function EditDeck() {
 
     const { deckId } = useParams();
-    const [deck, setDeck] = useState([]);
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
     const history = useHistory();
+    
+    const initialDeckState = {
+        id: "",
+        name: "",
+        description: "",
+    };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        history.push(`/decks/${deckId}`);
+    const [deck, setDeck] = useState([]);
+    
 
-        const editedDeck = {
-            name: name,
-            description: description,
-        };
-
-        readDeck(deckId, editedDeck);
-
-            setName("");
-            setDescription("");               
-        };
-
-            const handleCancel = async() => {
-                const result = window.confirm("Cancel? You will lose any changes.");
-                if (result) {
-                    history.push(`/decks/${deckId}`);
-                }
+    useEffect(() => {
+        async function loadDeckToEdit               () {
+            const abortController = new AbortController();
+            try {
+                const response = await readDeck(deckId, abortController.signal);
+                setDeck(response);
+            } catch (error) {
+                console.error("Something went wrong", error);
+            }
+            return () => {
+                abortController.abort();
             };
-
-            useEffect(() => {
-                async function loadEditDeck() {
-                    try {
-                        const response = await readDeck(deckId);
-                        setDeck(response);
-                    } catch (error) {
-                        console.log(error);
-                    }
-                }
-                loadEditDeck();
-            }, [deckId]);
-            
-     
+        }
+        loadDeckToEdit();
+    }, []);
+        
+    
+    async function handleChange({target}) {
+        setDeck({
+            ...deck,
+            [target.name]: target.value,
+        });
+    }
+    
+    
+    async function handleSubmit(event) {
+        event.preventDefault();
+        const abortController = new AbortController();
+        const response = await updateDeck({ ...deck }, abortController.signal);
+        history.push(`/decks/${deckId}`);
+        return response;
+    };
+    
+    const handleCancel = (event) => {
+        event.preventDefault();
+        const result = window.confirm("Cancel? You will lose any changes.");
+        if (result) {
+            history.push(`/decks/${deckId}`);
+        }
+    };
+    
+    
+    
+    
+    
 
             return (
                 <>
@@ -65,7 +85,11 @@ function EditDeck() {
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item">
                                 <Link to="/"> Home </Link>
+                            </li>
+                            <li>
                                 <Link to={`/decks/${deck.id}`}> / {deck.name} </Link>
+                            </li>
+                            <li>
                                 / Edit Deck
                             </li>
                         </ol>
@@ -82,9 +106,8 @@ function EditDeck() {
                                     id="name"
                                     name="name"
                                     type="text"
-                                    placeholder={deck.name}
-                                    required={true}
-                                    onChange={(event) => setName(event.target.value)}
+                                    onChange={handleChange}
+                                    value={deck.name}
                                 />
                             </div>
                             <h6>Description</h6>
@@ -94,9 +117,8 @@ function EditDeck() {
                                     id="description"
                                     name="description"
                                     type="text"
-                                    placeholder={deck.description}
-                                    required={true}
-                                    onChange={(event) => setDescription(event.target.value)}
+                                    onChange={handleChange}
+                                    value={deck.description}
                                 />
                             </div>
                         </div>
