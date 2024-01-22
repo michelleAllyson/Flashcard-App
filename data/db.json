@@ -70,6 +70,36 @@
       "back": "Back side of card 1",
       "deckId": 1,
       "id": 9
+    },
+    {
+      "front": "Front of card 11.1",
+      "back": "Back of card 11.1",
+      "deckId": 6,
+      "id": 10
+    },
+    {
+      "front": "Front side of card 11.77",
+      "back": "Back side of card 11.77",
+      "deckId": 6,
+      "id": 11
+    },
+    {
+      "front": "Will you add and reset?",
+      "back": "Will you add and reset back?",
+      "deckId": 6,
+      "id": 12
+    },
+    {
+      "front": "Should make this card 4 if works",
+      "back": "Should make this card 4 back if works",
+      "deckId": 6,
+      "id": 13
+    },
+    {
+      "front": "9 x 11",
+      "back": "99",
+      "deckId": 7,
+      "id": 14
     }
   ]
 }
