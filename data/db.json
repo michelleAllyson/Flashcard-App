@@ -58,6 +58,18 @@
       "back": "b",
       "deckId": 1,
       "id": 7
+    },
+    {
+      "front": "asdfa",
+      "back": "fasdfasd",
+      "deckId": 1,
+      "id": 8
+    },
+    {
+      "front": "Front side of card 1",
+      "back": "Back side of card 1",
+      "deckId": 1,
+      "id": 9
     }
   ]
 }

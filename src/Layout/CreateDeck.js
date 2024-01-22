@@ -30,7 +30,7 @@ function CreateDeck() {
         description: description,
     };
 
-    createDeck(newDeck);
+    CreateDeck(newDeck);
     
     setName("");
     setDescription("");
@@ -50,7 +50,7 @@ function CreateDeck() {
                     <li className="breadcrumb-item">
                         <Link to="/"> Home  </Link>
                     </li> 
-                    <li>/ Create Deck</li>
+                    <li className="breadcrumb-item">/ Create Deck</li>
                 </ol>
             
             </nav>
