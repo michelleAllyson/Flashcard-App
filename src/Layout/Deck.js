@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 
 //utils
-import { readDeck, deleteDeck } from "../utils/api";
+import { readDeck, deleteDeck, readCard } from "../utils/api";
 
 //libraries for icons
 import { TrashIcon } from '@heroicons/react/24/solid';
@@ -10,10 +10,39 @@ import { BookmarkIcon } from '@heroicons/react/24/solid';
 import { PlusIcon } from '@heroicons/react/16/solid';
 import { PencilSquareIcon } from '@heroicons/react/16/solid';
 
-const Deck = () => {
+
+//The Deck screen has the following features:
+    // The path to this screen should include the deckId (i.e., /decks/:deckId).
+    // You must use the readDeck() function from src/utils/api/index.js to load the existing deck.
+    // There is a breadcrumb navigation bar with a link to home / followed by the name of the deck (e.g., Home/React Router).
+    // The screen includes the deck name (e.g., "React Router") and deck description (e.g., "React Router is a collection of navigational components that compose declaratively in your application").
+    // The screen includes Edit, Study, Add Cards, and Delete buttons. Each button takes the user to a different destination, as follows:
+
+    // | Button Clicked | Destination |
+    // | -------------- | ---------------------------------------------------------------------------------------------- |
+    // | Edit | Edit Deck Screen |
+    // | Study | Study screen |
+    // | Add Cards | Add Card screen |
+    // | Delete | Shows a warning message before deleting the deck]( See the "Delete Card Prompt" section below) |
+
+    // Each card in the deck:
+
+    // Is listed on the page under the "Cards" heading.
+    // Shows a question and the answer to the question.
+    // Has an Edit button that takes the user to the Edit Card screen when clicked.
+    // Has a Delete button that allows that card to be deleted.
+    // Delete Card Prompt
+    // When the user clicks the Delete button associated with a card, a warning message is shown and the user can click OK or Cancel. If the user clicks OK, the card is deleted.
+
+    // You can use window.confirm() to create the modal dialog shown in the screenshot below
+
+
+
+function Deck() {
   const [deck, setDeck] = useState({});
+  const [cards, setCards] = useState([]);
   const history = useHistory();
-  const { deckId } = useParams(); 
+  const { deckId, cardId } = useParams(); 
 
   const handleDelete = async (deckId) => {
     const result = window.confirm(
@@ -35,6 +64,18 @@ const Deck = () => {
       }
     }
     loadDeck();
+  }, [deckId]); 
+
+  useEffect(() => {
+    async function loadCards() {
+      try {
+        const response = await readDeck(deckId); 
+        setCards(response.cards);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    loadCards();
   }, [deckId]); 
 
   return (
@@ -79,6 +120,40 @@ const Deck = () => {
               <TrashIcon /> Delete
             </button>
           </div>
+        </div>
+        <div>
+            <h1>Cards</h1>
+        </div>
+        <div class="row border">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Card Front</h5>
+                    <p class="card-text">This will be the front of the card contents {cards.front}</p>
+                </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Card Back</h5>
+                    <p class="card-text">This will be the back of the card contents {cards.back}</p>
+                    <Link
+                        // to={`/decks/${deck.id}/cards/${card.id}edit`}
+                        className="btn btn-secondary btn-sm"
+                        >
+                        <PencilSquareIcon /> Edit
+                        </Link>
+                                        <button
+                            type="button"
+                            className="btn btn-danger btn-sm" 
+                            // onClick={() => handleDelete(deck.id)}
+                        >
+                            <TrashIcon /> Delete
+                        </button>
+                </div>
+                </div>
+            </div>
         </div>
       </div>
     </div>
