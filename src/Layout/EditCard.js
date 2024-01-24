@@ -5,16 +5,8 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import { readDeck , readCard , updateCard } from "../utils/api";
 
 
-//AT A STOPPING POINT--need to update the Deck.js file to show cards, then come back to this file to finish the edit card functionality
+//-------FUNTIONALITY DONE, STILL NEEDS STYLING 1/24/2024----------------
 
-
-//path: "/decks/:deckId/cards/:cardId/edit"
-//The Edit Card screen has the following features:
-    // The path to this screen should include the deckId and the cardId (i.e., /decks/:deckId/cards/:cardId/edit).
-    // You must use the readDeck() function from src/utils/api/index.js to load the deck that contains the card to be edited. Additionally, you must use the readCard() function from src/utils/api/index.js to load the card that you want to edit.
-    // There is a breadcrumb navigation bar with a link to home /, followed by the name of the deck of which the edited card is a member, and finally the text Edit Card :cardId (e.g., Home/Deck React Router/Edit Card 4).
-    // It displays the same form as the Add Card screen, except it is prefilled with information for the existing card. It can be edited and updated.
-    // If the user clicks on either Save or Cancel, the user is taken to the Deck screen.
 
 
 function EditCard() {
@@ -62,7 +54,7 @@ function EditCard() {
             };
         }
         loadCardToEdit();
-    }, []);
+    }, [cardId]);
     
     
     async function handleChange({target}) {
@@ -83,22 +75,20 @@ function EditCard() {
         event.preventDefault();
         const result = window.confirm("Cancel? You will lose any changes.");
             history.push(`/decks/${deckId}`);
-        }
-        
-//AT A STOPPING POINT--need to update the Deck.js file to show cards, then come back to this file to finish the edit card functionality        
-        
+        };
+
         return (
             <>
                 <nav>
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
-                            <Link to="/"> Home /  </Link>
+                            <Link to="/"> Home   </Link>
                         </li>
                         <li className="breadcrumb-item">
-                            <Link to={`/decks/${deck.id}`}> {deck.name} /  </Link>
+                            <Link to={`/decks/${deck.id}`}> {deck.name}   </Link>
                         </li>
                         <li className="breadcrumb-item">    
-                            <Link to={`/decks/${deck.id}/edit`}>Edit Card {card.length}</Link>
+                            Edit Card {card.id}
                         </li> 
                     </ol>
                 </nav>
@@ -106,6 +96,45 @@ function EditCard() {
                 <div>
                     <h1>Edit Card</h1>
                 </div>
+                <form onSubmit={handleSubmit}>
+                    <h6>Front</h6>
+                    <div>
+                        <label htmlFor="front"></label>
+                        <textarea
+                            id="front"
+                            name="front"
+                            onChange={handleChange}
+                            value={card.front}
+                            placeholder="Front side of card"
+                            required
+                        />
+                    </div>
+                    <h6>Back</h6>
+                    <div>
+                        <label htmlFor="back"></label>
+                        <textarea
+                            id="back"
+                            name="back"
+                            onChange={handleChange}
+                            value={card.back}
+                            placeholder="Back side of card"
+                            required
+                        />
+                    </div>
+                    <button 
+                        type="button"
+                        className="btn btn-secondary btn-sm"
+                        onClick={handleCancel}
+                    >   
+                        Cancel
+                    </button>
+                    <button 
+                        type="submit"
+                        className="btn btn-primary btn-sm"
+                    >
+                        Submit
+                    </button>
+                </form>
             </>
     )
 };
