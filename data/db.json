@@ -12,7 +12,7 @@
     },
     {
       "name": "Multiplication Facts",
-      "description": "Practice your single digit multiplication facts.",
+      "description": "Practice your single digit multiplication facts. Will you edit now?",
       "id": 7
     }
   ],
@@ -58,6 +58,12 @@
       "back": "99",
       "deckId": 7,
       "id": 14
+    },
+    {
+      "front": "7 x 11",
+      "back": "77",
+      "deckId": 7,
+      "id": 15
     }
   ]
 }
