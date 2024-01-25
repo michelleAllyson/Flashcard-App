@@ -87,7 +87,7 @@ function EditCard() {
                         <li className="breadcrumb-item">
                             <Link to={`/decks/${deck.id}`}> {deck.name}   </Link>
                         </li>
-                        <li className="breadcrumb-item">    
+                        <li className="breadcrumb-item text-secondary">    
                             Edit Card {card.id}
                         </li> 
                     </ol>

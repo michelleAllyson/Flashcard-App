@@ -68,10 +68,10 @@ function AddCard() {
                     <li className="breadcrumb-item">
                         <Link to="/"> Home </Link>
                     </li>                
-                    <li>
-                        <Link to={`/decks/${deck.id}`}> / {deck.name}</Link>
+                    <li className="breadcrumb-item">
+                        <Link to={`/decks/${deck.id}`}> {deck.name}</Link>
                     </li>
-                    <li className="breadcrumb-item">/ Add Card</li>
+                    <li className="breadcrumb-item text-secondary">Add Card</li>
                 </ol>
             </nav>
             <div>

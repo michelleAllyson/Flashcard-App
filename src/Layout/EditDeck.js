@@ -86,11 +86,11 @@ function EditDeck() {
                             <li className="breadcrumb-item">
                                 <Link to="/"> Home </Link>
                             </li>
-                            <li>
-                                <Link to={`/decks/${deck.id}`}> / {deck.name} </Link>
+                            <li className="breadcrumb-item">
+                                <Link to={`/decks/${deck.id}`}> {deck.name} </Link>
                             </li>
-                            <li>
-                                / Edit Deck
+                            <li className="breadcrumb-item text-secondary">
+                                Edit Deck
                             </li>
                         </ol>
                     </nav>

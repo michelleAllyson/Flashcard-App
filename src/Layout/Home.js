@@ -71,16 +71,16 @@ export const Home = () => {
                         <h6 className="card-subtitle text-secondary">{deck.cards.length} cards</h6>
                         <p className="card-text flex-fill">{deck.description}</p>
                         <Link 
-                            to= {`/decks/${deck.id}/study`} 
-                            className="btn btn-secondary btn-sm"
-                        >
-                            <BookmarkIcon /> Study
-                        </Link>
-                        <Link 
                             to= {`/decks/${deck.id}`} 
-                            className="btn btn-primary btn-md"
+                            className="btn btn-secondary btn-md"
                         >
                            <EyeIcon /> View                        
+                        </Link>
+                        <Link 
+                            to= {`/decks/${deck.id}/study`} 
+                            className="btn btn-primary btn-sm"
+                        >
+                            <BookmarkIcon /> Study
                         </Link>
                         <button
                             type="button"

@@ -20,7 +20,7 @@ import { listDecks , readDeck } from "../utils/api";
     // Studying a deck with two or fewer cards should display a "Not enough cards" message (see the "Not enough cards" section below) and a button to add cards to the deck.
 
 
-export const Study = () => {
+function Study() {
 
     const { deckId } = useParams();
     const [deck, setDeck] = useState([]);
@@ -71,9 +71,13 @@ export const Study = () => {
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                        <Link to="/"> Home /  </Link>
-                        <Link to={`/decks/${deck.id}`}> {deck.name} /  </Link>
-                        <Link to={`/decks/${deck.id}/study`}>Study</Link>
+                        <Link to="/"> Home </Link>
+                    </li>
+                    <li className="breadcrumb-item">
+                        <Link to={`/decks/${deck.id}`}>  {deck.name} </Link>
+                    </li>
+                    <li className="breadcrumb-item text-secondary">
+                        Study
                     </li> 
                 </ol>
             </nav>

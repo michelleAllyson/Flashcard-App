@@ -83,9 +83,9 @@ function Deck() {
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-              <Link to="/"> Home / </Link>
+              <Link to="/"> Home </Link>
             </li>
-            <li>{deck.name}</li>
+            <li className="breadcrumb-item text-secondary">{deck.name}</li>
           </ol>
         </nav>
         <div>
