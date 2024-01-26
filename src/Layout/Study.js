@@ -26,6 +26,8 @@ function Study() {
     const { deckId, cardId } = useParams();
     const [deck, setDeck] = useState({});
     const [card, setCard] = useState([]);
+    const [currentCard, setCurrentCard] = useState(0);
+    const [isFlipped, setIsFlipped] = useState(false);
     const history = useHistory();
 
     const handleRestart = async(deckId) => {
@@ -63,21 +65,29 @@ function Study() {
 //May need more than what is listed below, but work in progress//
 
     const handleFlip = () => {
-        //flip the card
-    }
+        setIsFlipped(!isFlipped);
+    };
 
     const handleNext = () => {
-        //move to the next card
+        if (currentCard < deck.cards.length - 1) {
+            setCurrentCard(currentCard + 1);
+            setIsFlipped(false);
+        } else {
+            const restart = window.confirm(
+                "You've reached the end of the deck. Do you want to restart?"
+                );
+            if (restart) {
+                setCurrentCard(0);
+                setIsFlipped(false);
+            } else {
+                history.push("/");
+            }
+        }
     }
 
     const handleAddCard = () => {
         history.push(`/decks/${deckId}/cards/new`);
     };
-
-    // const handleNotEnoughCards = () => {}
-
-//May need more than what is listed above, but work in progress//
-
 
     return (
        <div> 
@@ -95,61 +105,60 @@ function Study() {
                 </ol>
             </nav>
             <div> 
-                {/* //title of deck */}
                 <h1>Study: {deck.name}</h1>
             </div>
-            {
-                deck.cards && deck.cards.length > 2 ? (
-                    deck.cards.map((card) => (
-            <div className="card" key={card.id}> 
-                <div className="card-body border">
-                    <div>
-                        <p className="card-subtitle text-secondary">Card {card.id} of {deck.cards.length}</p>
-                        {/* //card # of #.length */}
-                        <p className="card-text flex-fill">{card.front}</p>
-                        {/* card contents */}
-                    </div>
-                    <div>
-                        <button
-                            type="button"
-                            className="btn btn-secondary btn-sm"
-                            onClick={() => handleFlip()}
-                        >
-                        Flip
-                        </button>
-                        {/* //flip button */}
-                        <button
-                            type="button"
-                            className="btn btn-primary btn-sm" 
-                            onClick={() => handleNext(deck.id)}
-                        >
-                        Next
-                        </button>
-                        {/* //next button */}
-                    </div>       
-                </div>
-            </div>
-            ))
-        ) : (
-            <div>
-                <h3>Not enough cards.</h3>
-                {deck.cards !== undefined ? (
-                    <p>You need at least 3 cards to study. There are {deck.cards.length} cards in this deck.</p>
-                
-                ) : (
-                    <p>Loading...</p>
-                )}
-                <button
-                    type="button"
-                    className="btn btn-primary btn-sm"
-                    onClick={() => handleAddCard(deck.id)}
-                >
-                    Add Cards
-                </button>
-            </div>
-            )}
-        </div>
+            {deck.cards && deck.cards.length > 0 && deck.cards.length > currentCard ? (
+  <div className="card" key={deck.cards[currentCard].id}> 
+    <div className="card-body border">
+      <div>
+        <p className="card-subtitle text-secondary">
+          Card {currentCard + 1} of {deck.cards.length}
+        </p>
+        <p className="card-text flex-fill">
+          {isFlipped 
+            ? deck.cards[currentCard].back
+            : deck.cards[currentCard].front}
+        </p>
+      </div>
+      <div>
+        <button
+          type="button"
+          className="btn btn-secondary btn-sm"
+          onClick={handleFlip}
+        >
+          Flip
+        </button>                            
+        {!isFlipped && (
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={handleNext}
+          >
+            Next
+          </button>                            
+        )}
+      </div>       
+    </div>
+  </div>
+) : (
+  <div>
+    <h3>Not enough cards.</h3>
+    {deck.cards !== undefined ? (
+      <p>You need at least 1 card to study. There are {deck.cards.length} cards in this deck.</p>
+    ) : (
+      <p>Loading...</p>
+    )}
+    <button
+      type="button"
+      className="btn btn-primary btn-sm"
+      onClick={() => handleAddCard(deck.id)}
+    >
+      Add Cards
+    </button>
+  </div>
+)}
+</div>
     );
 }
 
-export default Study;
+export default Study; 
