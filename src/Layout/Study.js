@@ -3,7 +3,8 @@ import { Link, useParams, useHistory } from "react-router-dom";
 
 import Home from "./Home";
 import Deck from "./Deck";
-import { listDecks , readDeck } from "../utils/api";
+import { listDecks , readDeck, readCard } from "../utils/api";
+import AddCard from "./AddCard";
 
 
 
@@ -22,9 +23,9 @@ import { listDecks , readDeck } from "../utils/api";
 
 function Study() {
 
-    const { deckId } = useParams();
-    const [deck, setDeck] = useState([]);
-    const [cards, setCards] = useState([]);
+    const { deckId, cardId } = useParams();
+    const [deck, setDeck] = useState({});
+    const [card, setCard] = useState([]);
     const history = useHistory();
 
     const handleRestart = async(deckId) => {
@@ -36,16 +37,28 @@ function Study() {
     }
 
     useEffect(() => {
-        async function loadStudyDeck() {
-            try {
-                const response = await readDeck(deckId);
-                setDeck(response);
-            } catch (error) {
-                console.log(error);
-            }
+        async function loadDeck() {
+          try {
+            const response = await readDeck(deckId); 
+            setDeck(response);
+          } catch (error) {
+            console.log(error);
+          }
         }
-        loadStudyDeck();
-    }, []);
+        loadDeck();
+      }, [deckId]); 
+    
+      useEffect(() => {
+        async function loadCards() {
+          try {
+            const response = await readCard(cardId); 
+            setCard(response.cards);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        loadCards();
+      }, [cardId]); 
 
 //May need more than what is listed below, but work in progress//
 
@@ -58,10 +71,10 @@ function Study() {
     }
 
     const handleAddCard = () => {
-        //add a card to the deck if not enough cards
-    }
+        history.push(`/decks/${deckId}/cards/new`);
+    };
 
-    const handleNotEnoughCards = () => {}
+    // const handleNotEnoughCards = () => {}
 
 //May need more than what is listed above, but work in progress//
 
@@ -85,12 +98,15 @@ function Study() {
                 {/* //title of deck */}
                 <h1>Study: {deck.name}</h1>
             </div>
-            <div className="card" key={deck.id}> 
+            {
+                deck.cards && deck.cards.length > 2 ? (
+                    deck.cards.map((card) => (
+            <div className="card" key={card.id}> 
                 <div className="card-body border">
                     <div>
-                        <p className="card-subtitle text-secondary">Card (#cards.id) of (cards.length)</p>
+                        <p className="card-subtitle text-secondary">Card {card.id} of {deck.cards.length}</p>
                         {/* //card # of #.length */}
-                        <p className="card-text flex-fill">(card.front)</p>
+                        <p className="card-text flex-fill">{card.front}</p>
                         {/* card contents */}
                     </div>
                     <div>
@@ -113,11 +129,27 @@ function Study() {
                     </div>       
                 </div>
             </div>
-       </div>
-       
-        )
-   };
-
-
+            ))
+        ) : (
+            <div>
+                <h3>Not enough cards.</h3>
+                {deck.cards !== undefined ? (
+                    <p>You need at least 3 cards to study. There are {deck.cards.length} cards in this deck.</p>
+                
+                ) : (
+                    <p>Loading...</p>
+                )}
+                <button
+                    type="button"
+                    className="btn btn-primary btn-sm"
+                    onClick={() => handleAddCard(deck.id)}
+                >
+                    Add Cards
+                </button>
+            </div>
+            )}
+        </div>
+    );
+}
 
 export default Study;
