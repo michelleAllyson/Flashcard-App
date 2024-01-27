@@ -107,7 +107,7 @@ function Study() {
             <div> 
                 <h1>Study: {deck.name}</h1>
             </div>
-            {deck.cards && deck.cards.length > 0 && deck.cards.length > currentCard ? (
+            {deck.cards && deck.cards.length > 2 && deck.cards.length > currentCard ? (
   <div className="card" key={deck.cards[currentCard].id}> 
     <div className="card-body border">
       <div>
@@ -128,10 +128,10 @@ function Study() {
         >
           Flip
         </button>                            
-        {!isFlipped && (
+        {isFlipped && (
           <button
             type="button"
-            className="btn btn-secondary btn-sm"
+            className="btn btn-primary btn-sm"
             onClick={handleNext}
           >
             Next
@@ -144,7 +144,7 @@ function Study() {
   <div>
     <h3>Not enough cards.</h3>
     {deck.cards !== undefined ? (
-      <p>You need at least 1 card to study. There are {deck.cards.length} cards in this deck.</p>
+      <p>You need at least 3 cards to study. There are {deck.cards.length} cards in this deck.</p>
     ) : (
       <p>Loading...</p>
     )}
