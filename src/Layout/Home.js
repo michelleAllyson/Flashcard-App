@@ -33,8 +33,8 @@ export const Home = () => {
     const [decks, setDecks] = useState([]); 
     const history = useHistory();
     
-    const handleDelete = async (deckId) => {
-        const result = window.confirm("Delete this deck? You will not be able to recover it.");
+    const handleDeleteDeck = async (deckId) => {
+        const result = window.confirm(`Delete this deck with the id of ${deckId}? You will not be able to recover it.`);
         if (result) {
             await deleteDeck(deckId);
             history.go(0);
@@ -85,7 +85,7 @@ export const Home = () => {
                         <button
                             type="button"
                             className="btn btn-danger btn-sm" 
-                            onClick={() => handleDelete(deck.id)}
+                            onClick={() => handleDeleteDeck(deck.id)}
                         >
                             <TrashIcon /> Delete
                         </button>

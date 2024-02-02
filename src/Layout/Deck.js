@@ -34,7 +34,7 @@ function Deck() {
     );
     if (result) {
       await deleteDeck(deckId);
-      history.go(0);
+      history.push("/");
     }
   };
 
