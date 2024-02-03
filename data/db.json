@@ -3,12 +3,22 @@
     {
       "id": 1,
       "name": "Rendering in React",
-      "description": "React's component structure allows for quickly building a complex web application that relies on DOM manipulation. "
+      "description": "React's component structure allows for ..quickly building a complex web application that relies on DOM manipulation. "
     },
     {
       "name": "React Router",
       "description": "React Router is a collection of navigational components that compose declaratively with your application.",
       "id": 2
+    },
+    {
+      "name": "Special Ed Acronyms",
+      "description": "ABCs of special education",
+      "id": 3
+    },
+    {
+      "name": "Multiplication Facts",
+      "description": "Lets multiply!",
+      "id": 4
     }
   ],
   "cards": [
@@ -48,6 +58,66 @@
       "back": "b",
       "deckId": 1,
       "id": 7
+    },
+    {
+      "front": "TBI",
+      "back": "Traumatic Brain Injury",
+      "deckId": 3,
+      "id": 8
+    },
+    {
+      "front": "SDI",
+      "back": "Specially Designed Instruction",
+      "deckId": 3,
+      "id": 9
+    },
+    {
+      "front": "OHI",
+      "back": "Other Health Impairment",
+      "deckId": 3,
+      "id": 10
+    },
+    {
+      "front": "LRE",
+      "back": "Least Restrictive Environment",
+      "deckId": 3,
+      "id": 11
+    },
+    {
+      "front": "NOREP",
+      "back": "Notice of Recommended Educational Placement",
+      "deckId": 3,
+      "id": 12
+    },
+    {
+      "front": "SLD",
+      "back": "Specific Learning Disability",
+      "deckId": 3,
+      "id": 13
+    },
+    {
+      "front": "PBSP",
+      "back": "Positive Behavior Support Plan",
+      "deckId": 3,
+      "id": 14
+    },
+    {
+      "front": "7 x 11",
+      "back": "77",
+      "deckId": 4,
+      "id": 15
+    },
+    {
+      "front": "5 x 11",
+      "back": "55",
+      "deckId": 4,
+      "id": 16
+    },
+    {
+      "front": "3 x 11",
+      "back": "33",
+      "deckId": 4,
+      "id": 17
     }
   ]
 }

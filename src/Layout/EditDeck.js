@@ -84,7 +84,10 @@ function EditDeck() {
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item">
-                                <Link to="/"> Home </Link>
+                                <Link to="/"> 
+                                    <i className="fas fa-house"></i>
+                                     Home 
+                                </Link>
                             </li>
                             <li className="breadcrumb-item">
                                 <Link to={`/decks/${deck.id}`}> {deck.name} </Link>
@@ -98,25 +101,28 @@ function EditDeck() {
                         <h1>Edit Deck</h1>
                     </div>
                     <form onSubmit={handleSubmit}>
-                        <div>
-                            <h6>Name</h6>
-                            <div>
+                        <div className="card border-0">
+                            <h3 className="text-secondary mb-0 pt-2">Name</h3>
+                            <div className="card border-0 pb-3">
                                 <label htmlFor="name"></label>
                                 <input
                                     id="name"
                                     name="name"
                                     type="text"
+                                    className="form-control text-secondary"
                                     onChange={handleChange}
                                     value={deck.name}
                                 />
                             </div>
-                            <h6>Description</h6>
-                            <div>
+                            <h3 className="text-secondary mb-0 pt-2">Description</h3>
+                            <div className="card border-0 mt-0">
                                 <label htmlFor="description"></label>
                                 <textarea
                                     id="description"
                                     name="description"
                                     type="text"
+                                    className="form-control text-secondary"
+                                    rows={3}
                                     onChange={handleChange}
                                     value={deck.description}
                                 />
@@ -125,12 +131,12 @@ function EditDeck() {
                         <div>
                             <button
                                 type="button"
-                                className="btn btn-secondary btn-sm"
+                                className="btn btn-secondary btn-sm px-3 py-2 mt-3 mr-2"
                                 onClick={handleCancel}
                             >
                                 Cancel
                             </button>
-                            <button type="submit" className="btn btn-primary btn-sm">
+                            <button type="submit" className="btn btn-primary btn-sm px-3 py-2 mt-3">
                                 Submit
                             </button>
                         </div>

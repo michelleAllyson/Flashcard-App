@@ -127,10 +127,10 @@ function Deck() {
       <div>
         {deck.cards ? (
           deck.cards.map((card) => (
-            <div key={card.id} className="col-sm-6 mb-3 mb-sm-0">
+            <div key={card.id} className="card-body border">
               <div className="card border-0">
                 <div className="card-body">
-                  <div className="row border">
+                  <div className="row">
                     <div className="col-sm-6">
                       <h5 className="card-title">Card Front</h5>
                       <p className="card-text">{card.front}</p>

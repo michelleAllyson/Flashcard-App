@@ -23,24 +23,25 @@ function CreateDeck() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        history.push("/decks/:deckId");
-
+        // history.push("/decks/:deckId");
+    
     const newDeck = {
         name: name,
         description: description,
     };
-
-    CreateDeck(newDeck);
+    
+    createDeck(newDeck);
     
     setName("");
     setDescription("");
-
+    
     event.target.reset();
 };
-    const handleCancel = () => {
-        history.push("/"); 
-    }
-    
+
+const handleCancel = () => {
+    history.push("/"); 
+}
+
     
     
     return (
