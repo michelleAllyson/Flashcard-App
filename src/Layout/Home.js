@@ -4,10 +4,8 @@ import { Link, useHistory } from "react-router-dom";
 import Study from "./Study";
 import Deck from "./Deck";
 import { listDecks , deleteDeck } from "../utils/api";
-import { TrashIcon } from '@heroicons/react/24/solid';
-import { EyeIcon } from '@heroicons/react/24/solid';
-import { BookmarkIcon } from '@heroicons/react/24/solid';
-import { PlusIcon } from '@heroicons/react/16/solid';
+
+
 
 //path: "/"
 
@@ -59,9 +57,10 @@ export const Home = () => {
             <div>
                 <Link 
                     to="/decks/new" 
-                    className="btn btn-secondary btn-sm"
+                    className="btn btn-secondary btn-lg"
+                    style={{ width: '175px', height: '100%'}}
                 >
-                    <PlusIcon /> Create Deck
+                <i className="fa-solid fa-plus" ></i> Create Deck
                 </Link>
             </div>
             {decks.map((deck) => ( 
@@ -70,25 +69,38 @@ export const Home = () => {
                         <h3 className="card-title text-secondary flex-fill">{deck.name}</h3>
                         <h6 className="card-subtitle text-secondary">{deck.cards.length} cards</h6>
                         <p className="card-text flex-fill">{deck.description}</p>
-                        <Link 
-                            to= {`/decks/${deck.id}`} 
-                            className="btn btn-secondary btn-md"
-                        >
-                           <EyeIcon /> View                        
-                        </Link>
-                        <Link 
-                            to= {`/decks/${deck.id}/study`} 
-                            className="btn btn-primary btn-sm"
-                        >
-                            <BookmarkIcon /> Study
-                        </Link>
-                        <button
-                            type="button"
-                            className="btn btn-danger btn-sm" 
-                            onClick={() => handleDeleteDeck(deck.id)}
-                        >
-                            <TrashIcon /> Delete
-                        </button>
+                        <div className="card-body" style={{ display: 'flex'}}>
+                            <div style={{ display: 'flex', justifyContent: 'flex-start', width: '100%'}}>
+                                <Link to= {`/decks/${deck.id}`} className="btn btn-secondary btn-md" style={{ width: '75px', height: '60px', marginRight: '10px'}}>
+                                    <div style={{ textAlign: 'center', height: '100%'}}>
+                                        <i className="fa-solid fa-eye" ></i>
+                                        <br />
+                                        View
+                                    </div>
+                                </Link>
+                                <Link to= {`/decks/${deck.id}/study`} className="btn btn-primary btn-md" style={{ width: '75px', height: '60px'}}>
+                                    <div style={{ textAlign: 'center', height: '100%'}}>
+                                        <i className="fa-solid fa-book-bookmark" ></i> 
+                                        <br />
+                                        Study
+                                    </div>
+                                </Link>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
+                                <button
+                                    type="button"
+                                    className="btn btn-danger btn-md" 
+                                    style={{ width: '75px', height: '60px'}}
+                                    onClick={() => handleDeleteDeck(deck.id)}
+                                >
+                                    <div style={{ textAlign: 'center', height: '100%'}}> 
+                                        <i className="fa-solid fa-trash-can" ></i>
+                                        <br />
+                                        Delete
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )
