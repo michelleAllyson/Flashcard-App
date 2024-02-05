@@ -94,7 +94,10 @@ function Study() {
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                        <Link to="/"> Home </Link>
+                    <Link to="/" style={{ display: 'flex', alignItems: 'center'}}> 
+                        <i className="fas fa-house" style={{ marginRight: '5px'}}></i>
+                          Home 
+                    </Link>
                     </li>
                     <li className="breadcrumb-item">
                         <Link to={`/decks/${deck.id}`}>  {deck.name} </Link>
@@ -111,9 +114,9 @@ function Study() {
   <div className="card" key={deck.cards[currentCard].id}> 
     <div className="card-body border">
       <div>
-        <p className="card-subtitle text-secondary">
+        <h5 className="card-title">
           Card {currentCard + 1} of {deck.cards.length}
-        </p>
+        </h5>
         <p className="card-text flex-fill">
           {isFlipped 
             ? deck.cards[currentCard].back
@@ -123,7 +126,7 @@ function Study() {
       <div>
         <button
           type="button"
-          className="btn btn-secondary btn-sm"
+          className="btn btn-secondary btn-sm px-3 py-2 mt-3 mr-2"
           onClick={handleFlip}
         >
           Flip
@@ -131,7 +134,7 @@ function Study() {
         {isFlipped && (
           <button
             type="button"
-            className="btn btn-primary btn-sm"
+            className="btn btn-primary btn-sm px-3 py-2 mt-3"
             onClick={handleNext}
           >
             Next

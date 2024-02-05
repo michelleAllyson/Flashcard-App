@@ -83,7 +83,10 @@ function Deck() {
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-              <Link to="/"> Home </Link>
+              <Link to="/" style={{ display: 'flex', alignItems: 'center'}}> 
+                <i className="fas fa-house" style={{ marginRight: '5px'}}></i>
+                 Home 
+              </Link>
             </li>
             <li className="breadcrumb-item text-secondary">{deck.name}</li>
           </ol>
@@ -91,32 +94,47 @@ function Deck() {
         <div>
           <h2>{deck.name}</h2>
           <p>{deck.description}</p>
-          <div>
-            <Link
-              to={`/decks/${deck.id}/edit`}
-              className="btn btn-secondary btn-sm"
-            >
-              <PencilSquareIcon /> Edit
-            </Link>
-            <Link
-              to={`/decks/${deck.id}/study`}
-              className="btn btn-primary btn-sm"
-            >
-              <BookmarkIcon /> Study
-            </Link>
-            <Link
-              to={`/decks/${deck.id}/cards/new`}
-              className="btn btn-primary btn-sm"
-            >
-              <PlusIcon /> Add Cards
-            </Link>
-            <button
-              type="button"
-              className="btn btn-danger btn-sm"
-              onClick={() => handleDelete(deck.id)}
-            >
-              <TrashIcon /> Delete
-            </button>
+          <div className="card-body" style={{ display: 'flex'}}>
+          <div style={{ display: 'flex', justifyContent: 'flex-start', width: '100%'}}>
+              <div>
+                <Link to={`/decks/${deck.id}/edit`} className="btn btn-secondary btn-md" style={{ width: '75px', height: '60px', marginRight: '10px'}}>
+                  <div style={{ textAlign: 'center', height: '100%'}}>
+                      <i className="fa-solid fa-pencil" ></i>
+                      <br />
+                      Edit
+                  </div>
+                </Link>
+                <Link to={`/decks/${deck.id}/study`} className="btn btn-primary btn-md"style={{ width: '75px', height: '60px', marginRight: '10px'}}>
+                  <div style={{ textAlign: 'center', height: '100%'}}>
+                      <i className="fa-solid fa-book-bookmark" ></i> 
+                      <br />
+                      Study
+                  </div>
+                </Link>
+                <Link to={`/decks/${deck.id}/cards/new`} className="btn btn-primary btn-md"style={{ width: '125px', height: '60px', marginRight: '10px'}}>
+                  <div style={{ textAlign: 'center', height: '100%'}}>
+                      <i className="fa-solid fa-plus" ></i> 
+                      <br />
+                      Add Cards
+                  </div>
+                </Link>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', width: '50%'}}>
+                <button
+                  type="button"
+                  className="btn btn-danger btn-md"
+                  style={{ width: '75px', height: '60px'}}
+                  onClick={() => handleDelete(deck.id)}
+                >
+                  <div style={{ textAlign: 'center', height: '100%'}}> 
+                      <i className="fa-solid fa-trash-can" ></i>
+                      <br />
+                      Delete
+                    </div>
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
      
@@ -139,20 +157,29 @@ function Deck() {
                       <h5 className="card-title">Card Back</h5>
                       <p className="card-text">{card.back}</p>
                     </div>
-                  <Link
-                    to={`/decks/${deck.id}/cards/${card.id}/edit`}
-                    className="btn btn-secondary btn-sm"
-                    >
-                    <PencilSquareIcon /> Edit
+                  <div className="card-body" style={{ display: 'flex', justifyContent: 'flex-end'}}> 
+                  <Link to={`/decks/${deck.id}/cards/${card.id}/edit`} className="btn btn-secondary btn-md" style={{ width: '75px', height: '60px', marginRight: '10px'}}>
+                    <div style={{ textAlign: 'center', height: '100%'}}>
+                      <i className="fa-solid fa-pencil" ></i>
+                      <br />
+                      Edit
+                  </div>
                   </Link>
                   <button
                     type="button"
-                    className="btn btn-danger btn-sm"
+                    className="btn btn-danger btn-md"
+                    style={{ width: '75px', height: '60px'}}
                     onClick={() => handleDeleteCard(card.id)}
                     >
-                    <TrashIcon /> Delete
-                  </button>
+                    <div style={{ textAlign: 'center', height: '100%'}}> 
+                      <i className="fa-solid fa-trash-can" ></i>
+                      <br />
+                      Delete
                     </div>
+                  </button>
+                  </div>
+
+                </div>
                 </div>
               </div>
             </div>

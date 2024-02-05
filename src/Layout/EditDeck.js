@@ -84,8 +84,8 @@ function EditDeck() {
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item">
-                                <Link to="/"> 
-                                    <i className="fas fa-house"></i>
+                                <Link to="/" style={{ display: 'flex', alignItems: 'center'}}> 
+                                    <i className="fas fa-house" style={{ marginRight: '5px'}}></i>
                                      Home 
                                 </Link>
                             </li>
@@ -136,7 +136,10 @@ function EditDeck() {
                             >
                                 Cancel
                             </button>
-                            <button type="submit" className="btn btn-primary btn-sm px-3 py-2 mt-3">
+                            <button 
+                                type="submit" 
+                                className="btn btn-primary btn-sm px-3 py-2 mt-3"
+                            >
                                 Submit
                             </button>
                         </div>

@@ -82,7 +82,10 @@ function EditCard() {
                 <nav>
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
-                            <Link to="/"> Home   </Link>
+                        <Link to="/" style={{ display: 'flex', alignItems: 'center'}}> 
+                            <i className="fas fa-house" style={{ marginRight: '5px'}}></i>
+                            Home 
+                        </Link>
                         </li>
                         <li className="breadcrumb-item">
                             <Link to={`/decks/${deck.id}`}> {deck.name}   </Link>
@@ -97,43 +100,47 @@ function EditCard() {
                     <h1>Edit Card</h1>
                 </div>
                 <form onSubmit={handleSubmit}>
-                    <h6>Front</h6>
-                    <div>
-                        <label htmlFor="front"></label>
-                        <textarea
-                            id="front"
-                            name="front"
-                            onChange={handleChange}
-                            value={card.front}
-                            placeholder="Front side of card"
-                            required
-                        />
+                    <div className="card border-0"> 
+                    <h5 className="text-secondary mp-0 pt-2">Front</h5>
+                        <div className="card border-0 pb-3">
+                            <label htmlFor="front"></label>
+                            <textarea
+                                id="front"
+                                name="front"
+                                className="form-control"
+                                value={card.front}
+                                placeholder="Front side of card"
+                                required={true}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <h5 className="text-secondary mp-0 pt-2">Back</h5>
+                        <div className="card border-0 mt-0">
+                            <label htmlFor="back"></label>
+                            <textarea
+                                id="back"
+                                name="back"
+                                className="form-control"
+                                value={card.back}
+                                placeholder="Back side of card"
+                                required={true}
+                                onChange={handleChange}
+                            />
+                        </div>
                     </div>
-                    <h6>Back</h6>
-                    <div>
-                        <label htmlFor="back"></label>
-                        <textarea
-                            id="back"
-                            name="back"
-                            onChange={handleChange}
-                            value={card.back}
-                            placeholder="Back side of card"
-                            required
-                        />
-                    </div>
-                    <button 
-                        type="button"
-                        className="btn btn-secondary btn-sm"
-                        onClick={handleCancel}
-                    >   
-                        Cancel
-                    </button>
-                    <button 
-                        type="submit"
-                        className="btn btn-primary btn-sm"
-                    >
-                        Submit
-                    </button>
+                        <button 
+                            type="button"
+                            className="btn btn-secondary btn-sm px-3 py-2 mt-3 mr-2"
+                            onClick={handleCancel}
+                        >   
+                            Cancel
+                        </button>
+                        <button 
+                            type="submit"
+                            className="btn btn-primary btn-sm px-3 py-2 mt-3"
+                        >
+                            Submit
+                        </button>
                 </form>
             </>
     )
