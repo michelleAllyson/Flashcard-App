@@ -4,6 +4,8 @@ import { Link, useHistory, useParams } from "react-router-dom";
 
 import { readDeck , readCard , updateCard } from "../utils/api";
 
+import CardForm from "./CardForm";
+
 
 //-------FUNTIONALITY DONE, STILL NEEDS STYLING 1/24/2024----------------
 
@@ -99,56 +101,12 @@ function EditCard() {
                 <div>
                     <h1>Edit Card</h1>
                 </div>
-                <form onSubmit={handleSubmit}>
-                    <div className="card border-0"> 
-                    <h5 className="text-secondary mp-0 pt-2">Front</h5>
-                        <div className="card border-0 pb-3">
-                            <label htmlFor="front"></label>
-                            <textarea
-                                id="front"
-                                name="front"
-                                className="form-control"
-                                value={card.front}
-                                placeholder="Front side of card"
-                                required={true}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <h5 className="text-secondary mp-0 pt-2">Back</h5>
-                        <div className="card border-0 mt-0">
-                            <label htmlFor="back"></label>
-                            <textarea
-                                id="back"
-                                name="back"
-                                className="form-control"
-                                value={card.back}
-                                placeholder="Back side of card"
-                                required={true}
-                                onChange={handleChange}
-                            />
-                        </div>
-                    </div>
-                        <button 
-                            type="button"
-                            className="btn btn-secondary btn-sm px-3 py-2 mt-3 mr-2"
-                            onClick={handleCancel}
-                        >   
-                            Cancel
-                        </button>
-                        <button 
-                            type="submit"
-                            className="btn btn-primary btn-sm px-3 py-2 mt-3"
-                        >
-                            Submit
-                        </button>
-                </form>
+                {/* Replaced separate form component with CardForm.js to be used for AddCard and EditCard* 
+                    See previous commits for EditCard form */}
+                <CardForm card={card} handleChange={handleChange} handleSubmit={handleSubmit} handleCancel={handleCancel} isNew={false} />   
             </>
     )
 };
-
-
-
-
 
 
 export default EditCard;
